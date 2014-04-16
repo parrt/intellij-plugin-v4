@@ -6,6 +6,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
+import com.intellij.openapi.editor.event.EditorMouseMotionAdapter;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.ui.components.JBScrollPane;
 import org.antlr.intellij.plugin.ANTLRv4ProjectComponent;
@@ -31,6 +32,9 @@ public class ParseTreePanel extends JPanel {
 	 */
 	protected String grammarFileName;
 	protected String startRule;
+
+	protected EditorMouseMotionAdapter editorMouseListener =
+		new PreviewEditorMouseListener();
 
 	public ParseTreePanel() {
 		buildGUI();
@@ -77,6 +81,8 @@ public class ParseTreePanel extends JPanel {
 				setInput(newText);
 			}
 		});
+
+		editor.addEditorMouseMotionListener(editorMouseListener);
 
 		console = new JTextArea();
 
