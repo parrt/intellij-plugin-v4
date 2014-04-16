@@ -1,5 +1,7 @@
 package org.antlr.intellij.plugin.preview;
 
+import com.intellij.codeInsight.hint.HintManager;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.EditorMouseEvent;
@@ -20,7 +22,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class PreviewEditorMouseListener extends EditorMouseMotionAdapter {
-	protected Balloon lastBalloon;
+//	protected Balloon lastBalloon;
 	protected Point lastPoint;
 
 	@Override
@@ -31,8 +33,13 @@ public class PreviewEditorMouseListener extends EditorMouseMotionAdapter {
 			Editor editor=e.getEditor();
 			LogicalPosition pos=editor.xyToLogicalPosition(point);
 			int offset=editor.logicalPositionToOffset(pos);
+			System.out.println("offset="+offset);
 			int selStart=editor.getSelectionModel().getSelectionStart();
 			int selEnd=editor.getSelectionModel().getSelectionEnd();
+			int caret = editor.getCaretModel().getOffset();
+			Point above = new Point(point);
+			above.translate(0, -editor.getLineHeight());
+			RelativePoint where = new RelativePoint(mouseEvent.getComponent(), above);
 
 
 //						highlighter.setErrorStripeTooltip(highlightInfo);
@@ -41,29 +48,61 @@ public class PreviewEditorMouseListener extends EditorMouseMotionAdapter {
 //						editor.getComponent().setToolTipText("fooo");
 //						toolTipManager.mouseEntered(mouseEvent);
 
-			if ( lastPoint==null || Math.abs(lastPoint.getX() - point.getX())>=8 ) {
+//			if ( lastPoint==null || Math.abs(lastPoint.getX() - point.getX())>=8 ) {
 				MarkupModel markupModel=editor.getMarkupModel();
 				markupModel.removeAllHighlighters();
-				if ( lastBalloon!=null ) {
-					lastBalloon.hide();
-				}
+//				if ( lastBalloon!=null ) {
+//					lastBalloon.hide();
+//				}
+
+				CaretModel caretModel = editor.getCaretModel();
+				if ( offset >= editor.getDocument().getTextLength() ) return;
+
+				// Underline
 				final TextAttributes attr=new TextAttributes();
 				attr.setForegroundColor(JBColor.BLUE);
 				attr.setEffectColor(JBColor.BLUE);
 				attr.setEffectType(EffectType.LINE_UNDERSCORE);
-				RangeHighlighter highlighter=
+				RangeHighlighter rangehighlighter=
 					markupModel.addRangeHighlighter(offset,offset+1,0,attr, HighlighterTargetArea.EXACT_RANGE);
+
+				// try HINT
+				caretModel.moveToOffset(offset);
+				HintManager.getInstance().showInformationHint(editor, "fooooo");
+//				HintManager.getInstance().showQuestionHint(editor, "Type: foo\\nick: 8", offset, offset+1,
+//														   new QuestionAction() {
+//															   @Override
+//															   public boolean execute() {
+//																   return false;
+//															   }
+//														   });
+//				HintManager.getInstance().showErrorHint(editor, "blort", HintManager.ABOVE);
+
+				// try raw Hint
+//				int flags =
+//					HintManager.HIDE_BY_ANY_KEY |
+//					HintManager.HIDE_BY_TEXT_CHANGE |
+//					HintManager.HIDE_BY_SCROLLING |
+//					HintManager.ABOVE;
+//				int timeout = 1000; // 1s?
+//				HintManager.getInstance().showHint(new JBLabel("Type: foo\nick: 8"), where, flags, timeout);
+
+				// try Tooltip
+//				editor.getComponent().setToolTipText("HI");
+//				String toolTipText = editor.getComponent().getToolTipText();
+//				JToolTip toolTip = editor.getComponent().createToolTip();
+//				toolTip.setToolTipText("fubar");
+//				toolTip.show();
+
 //				HighlightInfo.Builder highlightInfo = HighlightInfo.newHighlightInfo(HighlightInfoType.WARNING);
 //				highlighter.setErrorStripeTooltip(highlightInfo);
 				BalloonBuilder builder =
 					JBPopupFactory.getInstance().createHtmlTextBalloonBuilder("hello", MessageType.INFO, null);
 				Balloon balloon = builder.createBalloon();
-				System.out.println("show at " + point);
-				RelativePoint where = new RelativePoint(mouseEvent.getComponent(), point);
-				balloon.show(where, Balloon.Position.above);
-				lastBalloon = balloon;
+				//balloon.show(where, Balloon.Position.above);
+//				lastBalloon = balloon;
 				lastPoint = point;
-			}
+//			}
 		}
 	}
 }
