@@ -18,6 +18,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 public class ANTLRv4SyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey RULE_ATTRIBUTES = CodeInsightColors.INSTANCE_FIELD_ATTRIBUTES;
 	public static final TextAttributesKey TOKEN_ATTRIBUTES = CodeInsightColors.INSTANCE_FIELD_ATTRIBUTES;
+	public static final TextAttributesKey LABEL_ATTRIBUTES = CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES;
 	static{
 		RULE_ATTRIBUTES.getDefaultAttributes().setForegroundColor(new Color(102,100,191));
 		TOKEN_ATTRIBUTES.getDefaultAttributes().setForegroundColor(new Color(130,72,146));
@@ -26,6 +27,7 @@ public class ANTLRv4SyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey KEYWORD = createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey RULENAME = createTextAttributesKey("RULENAME", RULE_ATTRIBUTES);
 	public static final TextAttributesKey TOKENNAME = createTextAttributesKey("TOKENNAME", TOKEN_ATTRIBUTES);
+	public static final TextAttributesKey LABELNAME = createTextAttributesKey("LABELNAME", LABEL_ATTRIBUTES);
 	public static final TextAttributesKey STRING =
 		createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey LINE_COMMENT =
@@ -59,6 +61,9 @@ public class ANTLRv4SyntaxHighlighter extends SyntaxHighlighterBase {
 		}
 		else if ( tokenType == ANTLRv4TokenTypes.TOKEN_ELEMENT_TYPES.get(ANTLRv4Lexer.RULE_REF) ) {
 			return new TextAttributesKey[]{RULENAME};
+		}
+		else if ( tokenType == ANTLRv4TokenTypes.TOKEN_ELEMENT_TYPES.get(ANTLRv4Lexer.ID) ) {
+			return new TextAttributesKey[]{LABELNAME};
 		}
 		else if (tokenType == ANTLRv4TokenTypes.TOKEN_ELEMENT_TYPES.get(ANTLRv4Lexer.STRING_LITERAL)
 			|| tokenType == ANTLRv4TokenTypes.TOKEN_ELEMENT_TYPES.get(ANTLRv4Lexer.UNTERMINATED_STRING_LITERAL)) {

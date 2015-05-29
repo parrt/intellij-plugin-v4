@@ -18,6 +18,7 @@ public class ANTLRv4ColorsPage implements ColorSettingsPage {
 		{
 			new AttributesDescriptor("Lexer Rule", ANTLRv4SyntaxHighlighter.TOKENNAME),
 			new AttributesDescriptor("Parser Rule", ANTLRv4SyntaxHighlighter.RULENAME),
+			new AttributesDescriptor("Element label", ANTLRv4SyntaxHighlighter.LABELNAME),
 		};
 
 	@Nullable
@@ -38,7 +39,8 @@ public class ANTLRv4ColorsPage implements ColorSettingsPage {
 		return
 			"grammar Foo;\n" +
 			"\n" +
-			"compilationUnit : STUFF EOF;\n" +
+			"compilationUnit : x=STUFF y=decl EOF;\n" +
+			"decl : 'junk';\n" +
 			"\n" +
 			"STUFF : 'stuff' -> pushMode(OTHER_MODE);\n" +
 			"WS : [ \\t]+ -> channel(HIDDEN);\n" +

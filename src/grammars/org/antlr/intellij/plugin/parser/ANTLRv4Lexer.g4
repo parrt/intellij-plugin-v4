@@ -34,7 +34,8 @@ lexer grammar ANTLRv4Lexer;
 tokens {
 	TOKEN_REF,
 	RULE_REF,
-	LEXER_CHAR_SET
+	LEXER_CHAR_SET,
+	LABEL
 }
 
 @members {
@@ -77,14 +78,22 @@ tokens {
 	public Token emit() {
 		if (_type == ID) {
 			String firstChar = _input.getText(Interval.of(_tokenStartCharIndex, _tokenStartCharIndex));
+			String afterLastChar = null;
+			int i = _input.index();
+			boolean inRule = _currentRuleType==Token.INVALID_TYPE;
+			// are we a label?
+			if ( inRule && _input.LA(1) == '=' || (_input.LA(1)=='+' && _input.LA(2)=='=') ) {
+				System.out.println(getText()+" is label");
+				// leave _type == ID
+			}
 			if (Character.isUpperCase(firstChar.charAt(0))) {
 				_type = TOKEN_REF;
 			} else {
 				_type = RULE_REF;
 			}
 
-			if (_currentRuleType == Token.INVALID_TYPE) { // if outside of rule def
-				_currentRuleType = _type;                 // set to inside lexer or parser rule
+			if ( !inRule ) {				 // if outside of rule def
+				_currentRuleType = _type;    // set to inside lexer or parser rule
 			}
 		}
 		else if (_type == SEMI) {                  // exit rule def
@@ -283,6 +292,21 @@ ACTION_CHAR_LITERAL
 ERRCHAR
 	:	.	-> channel(HIDDEN)
 	;
+
+mode Options;
+
+RBRACE	: '}'							-> popMode ;
+SEMI	: ';' ;
+ASSIGN	: '=' ;
+DOT		: '.' ;
+
+/*
+optionValue
+	:	id (DOT id)*
+	|	STRING_LITERAL
+	|	ACTION
+	|	INT
+*/
 
 mode ArgAction; // E.g., [int x, List<String> a[]]
 
