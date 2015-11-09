@@ -156,9 +156,10 @@ For really big files and slow grammars, there is an appreciable delay when displ
 	  <liveTemplateContext implementation="org.antlr.intellij.plugin.templates.OutsideRuleContext"/>
 
       <!-- StringTemplate stuff -->
+      <fileTypeFactory implementation="org.antlr.intellij.plugin.STGroupv4FileTypeFactory"/>
       <fileTypeFactory implementation="org.antlr.intellij.plugin.STv4FileTypeFactory"/>
-      <lang.parserDefinition language="STv4" implementationClass="org.antlr.intellij.plugin.STv4ParserDefinition"/>
-      <lang.ast.factory language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.STv4ASTFactory"/>
+      <!--<lang.parserDefinition language="STv4" implementationClass="org.antlr.intellij.plugin.STv4ParserDefinition"/>-->
+      <!--<lang.ast.factory language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.STv4ASTFactory"/>-->
 
   </extensions>
 </idea-plugin>

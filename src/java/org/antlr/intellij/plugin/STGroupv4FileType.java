@@ -6,34 +6,34 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class STv4FileType extends LanguageFileType {
-	public static final STv4FileType INSTANCE = new STv4FileType();
+public class STGroupv4FileType extends LanguageFileType {
+	public static final STGroupv4FileType INSTANCE = new STGroupv4FileType();
 
-	private STv4FileType() {
+	private STGroupv4FileType() {
 		super(STv4Language.INSTANCE);
 	}
 
 	@NotNull
 	@Override
 	public String getName() {
-		return "StringTemplate v4 template file";
+		return "StringTemplate v4 template group file";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription() {
-		return "StringTemplate v4 template file";
+		return "StringTemplate v4 template group file";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension() {
-		return "st";
+		return "stg";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return Icons.ST_FILE;
+		return Icons.STG_FILE;
 	}
 }
