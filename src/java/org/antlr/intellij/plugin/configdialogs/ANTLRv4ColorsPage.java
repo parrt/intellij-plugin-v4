@@ -23,7 +23,7 @@ public class ANTLRv4ColorsPage implements ColorSettingsPage {
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return Icons.FILE;
+		return Icons.ANTLR_FILE;
 	}
 
 	@NotNull

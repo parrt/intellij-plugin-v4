@@ -26,7 +26,7 @@ public class ANTLRv4FileRoot extends PsiFileBase {
 
     @Override
     public Icon getIcon(int flags) {
-		return Icons.FILE;
+		return Icons.ANTLR_FILE;
     }
 
 	@NotNull

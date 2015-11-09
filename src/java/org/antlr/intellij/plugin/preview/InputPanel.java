@@ -430,7 +430,7 @@ public class InputPanel {
 		startRuleLabel.setForeground(JBColor.BLACK);
 		final Font oldFont = startRuleLabel.getFont();
 		startRuleLabel.setFont(oldFont.deriveFont(Font.BOLD));
-		startRuleLabel.setIcon(Icons.FILE);
+		startRuleLabel.setIcon(Icons.ANTLR_FILE);
 	}
 
 	public void resetStartRuleLabel() {
@@ -440,7 +440,7 @@ public class InputPanel {
 		}
 		startRuleLabel.setText(String.format(missingStartRuleLabelText, grammarName));
 		startRuleLabel.setForeground(JBColor.RED);
-		startRuleLabel.setIcon(Icons.FILE);
+		startRuleLabel.setIcon(Icons.ANTLR_FILE);
 	}
 
 	public void clearErrorConsole() {

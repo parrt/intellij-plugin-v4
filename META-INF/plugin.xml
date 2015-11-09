@@ -137,7 +137,7 @@ For really big files and slow grammars, there is an appreciable delay when displ
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-	  <!--<codeInsight.lineMarkerProvider language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.ANTLRv4LineMarkerProvider"/>-->
+      <!-- ANTLR stuff -->
       <fileTypeFactory implementation="org.antlr.intellij.plugin.ANTLRv4FileTypeFactory"/>
       <lang.syntaxHighlighterFactory key="ANTLRv4" implementationClass="org.antlr.intellij.plugin.ANTLRv4SyntaxHighlighterFactory"/>
       <lang.commenter language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.ANTLRv4Commenter" />
@@ -147,8 +147,6 @@ For really big files and slow grammars, there is an appreciable delay when displ
       <lang.psiStructureViewFactory language="ANTLRv4"
                 implementationClass="org.antlr.intellij.plugin.structview.ANTLRv4StructureViewFactory"/>
       <lang.foldingBuilder language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.folding.ANTLRv4FoldingBuilder" />
-
-
       <externalAnnotator language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.ANTLRv4ExternalAnnotator"/>
       <lang.findUsagesProvider language="ANTLRv4"
                 implementationClass="org.antlr.intellij.plugin.ANTLRv4FindUsagesProvider"/>
@@ -156,5 +154,11 @@ For really big files and slow grammars, there is an appreciable delay when displ
 	  <defaultLiveTemplatesProvider implementation="org.antlr.intellij.plugin.templates.ANTLRLiveTemplatesProvider"/>
 	  <liveTemplateContext implementation="org.antlr.intellij.plugin.templates.ANTLRGenericContext"/>
 	  <liveTemplateContext implementation="org.antlr.intellij.plugin.templates.OutsideRuleContext"/>
+
+      <!-- StringTemplate stuff -->
+      <fileTypeFactory implementation="org.antlr.intellij.plugin.STv4FileTypeFactory"/>
+      <lang.parserDefinition language="STv4" implementationClass="org.antlr.intellij.plugin.STv4ParserDefinition"/>
+      <lang.ast.factory language="ANTLRv4" implementationClass="org.antlr.intellij.plugin.STv4ASTFactory"/>
+
   </extensions>
 </idea-plugin>

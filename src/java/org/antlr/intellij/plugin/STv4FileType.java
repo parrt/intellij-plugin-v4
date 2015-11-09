@@ -6,34 +6,34 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class ANTLRv4FileType extends LanguageFileType {
-	public static final ANTLRv4FileType INSTANCE = new ANTLRv4FileType();
+public class STv4FileType extends LanguageFileType {
+	public static final STv4FileType INSTANCE = new STv4FileType();
 
-	private ANTLRv4FileType() {
-		super(ANTLRv4Language.INSTANCE);
+	private STv4FileType() {
+		super(STv4Language.INSTANCE);
 	}
 
 	@NotNull
 	@Override
 	public String getName() {
-		return "ANTLR v4 grammar file";
+		return "StringTemplate v4 template group file";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription() {
-		return "ANTLR v4 grammar file";
+		return "StringTemplate v4 template group file";
 	}
 
 	@NotNull
 	@Override
 	public String getDefaultExtension() {
-		return "g4";
+		return "stg";
 	}
 
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return Icons.ANTLR_FILE;
+		return Icons.ST_FILE;
 	}
 }

@@ -26,7 +26,7 @@ public class ANTLRv4LineMarkerProvider implements LineMarkerProvider {
 				}
 			};
 		if ( element instanceof RuleSpecNode ) {
-			return new LineMarkerInfo<PsiElement>(element, element.getTextRange(), Icons.FILE,
+			return new LineMarkerInfo<PsiElement>(element, element.getTextRange(), Icons.ANTLR_FILE,
 												  Pass.UPDATE_ALL, null, navHandler,
 												  GutterIconRenderer.Alignment.LEFT);
 		}
