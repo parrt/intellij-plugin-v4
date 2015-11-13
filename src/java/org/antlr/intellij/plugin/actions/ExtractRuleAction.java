@@ -115,6 +115,8 @@ public class ExtractRuleAction extends AnAction {
 		MyPsiUtils.replacePsiFileFromText(project, psiFile, grammarText);
 		MyActionUtils.moveCursor(editor, selStart);
 
+		// TODO: check if new rule name conflicts with existing
+
 		// TODO: only allow selection of fully-formed syntactic entity.
 		// E.g., "A (',' A" is invalid grammatically as a rule.
 	}
